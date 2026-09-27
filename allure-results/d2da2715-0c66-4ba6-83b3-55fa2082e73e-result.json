@@ -1,0 +1,50 @@
+{
+    "name": "AuthWithWrongLogin",
+    "start": 1790503163881,
+    "stop": 1790503170117,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "d2da2715-0c66-4ba6-83b3-55fa2082e73e",
+    "historyId": "804a5896c7ac8e539fd97aa36eaf7830",
+    "fullName": "ru.edu.qamid.ui.NegativeAuthTest.AuthWithWrongLogin",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "AuthWithWrongLogin"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15433)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

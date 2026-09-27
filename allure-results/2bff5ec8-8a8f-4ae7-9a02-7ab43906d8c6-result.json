@@ -1,0 +1,50 @@
+{
+    "name": "appOpenControlPanel",
+    "start": 1790503612810,
+    "stop": 1790503619173,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "2bff5ec8-8a8f-4ae7-9a02-7ab43906d8c6",
+    "historyId": "1636cd02ef1656862fd92d329029a341",
+    "fullName": "ru.edu.qamid.ui.NewsNavigationTest.appOpenControlPanel",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsNavigationTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "appOpenControlPanel"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsNavigationTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15433)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

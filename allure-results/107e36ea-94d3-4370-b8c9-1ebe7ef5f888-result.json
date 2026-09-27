@@ -1,0 +1,50 @@
+{
+    "name": "shouldStayOnCreateScreenWithEmptyTime",
+    "start": 1790451287017,
+    "stop": 1790451297460,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "107e36ea-94d3-4370-b8c9-1ebe7ef5f888",
+    "historyId": "2634c3bdcab8017b876593108be2b71e",
+    "fullName": "ru.edu.qamid.ui.NewsCreateNegativeTest.shouldStayOnCreateScreenWithEmptyTime",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsCreateNegativeTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldStayOnCreateScreenWithEmptyTime"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsCreateNegativeTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14597)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

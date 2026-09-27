@@ -1,0 +1,50 @@
+{
+    "name": "shouldNewsPersistAfterRelogin",
+    "start": 1790503920807,
+    "stop": 1790503937165,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "008b9fd4-8503-43b6-b415-94058116c641",
+    "historyId": "ac0db29c394b7cdf33f29db51d961ef3",
+    "fullName": "ru.edu.qamid.ui.NewsCreateTest.shouldNewsPersistAfterRelogin",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldNewsPersistAfterRelogin"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15477)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

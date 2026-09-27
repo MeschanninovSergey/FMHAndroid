@@ -1,0 +1,50 @@
+{
+    "name": "AuthWithBothFieldsEmpty",
+    "start": 1790503170166,
+    "stop": 1790503174638,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "328e856f-20ea-46f2-81e2-6921f7920405",
+    "historyId": "e729fdeec7dd6d93918d9e2fed01655c",
+    "fullName": "ru.edu.qamid.ui.NegativeAuthTest.AuthWithBothFieldsEmpty",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "AuthWithBothFieldsEmpty"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15433)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

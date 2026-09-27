@@ -1,0 +1,50 @@
+{
+    "name": "AuthOK",
+    "start": 1790456850025,
+    "stop": 1790456855295,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "034af3ea-5c80-4e20-96d4-5b6e233e56f8",
+    "historyId": "45b902c05ee0e1e23c70b4efe87f10f",
+    "fullName": "ru.edu.qamid.ui.PositiveAuthTest.AuthOK",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.PositiveAuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "AuthOK"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.PositiveAuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14987)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

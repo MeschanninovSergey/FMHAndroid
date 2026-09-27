@@ -1,0 +1,50 @@
+{
+    "name": "shouldEditNewsDateAndVerify",
+    "start": 1790501912571,
+    "stop": 1790501928500,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "ee6cfade-99c2-4173-a8ef-e8574bba5852",
+    "historyId": "160a519ab272d250b0400a098a555862",
+    "fullName": "ru.edu.qamid.ui.NewsEditTest.shouldEditNewsDateAndVerify",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsEditTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldEditNewsDateAndVerify"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsEditTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15387)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

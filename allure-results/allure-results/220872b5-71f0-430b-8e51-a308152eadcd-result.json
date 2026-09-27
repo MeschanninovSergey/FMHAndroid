@@ -1,0 +1,50 @@
+{
+    "name": "shouldDeleteNews",
+    "start": 1790456560204,
+    "stop": 1790456575152,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "220872b5-71f0-430b-8e51-a308152eadcd",
+    "historyId": "e0d4baf1a38ead6855f84ccd77137190",
+    "fullName": "ru.edu.qamid.ui.NewsDeleteTest.shouldDeleteNews",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsDeleteTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldDeleteNews"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsDeleteTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14987)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name": "appSwitchToQuotesFromMainPage",
+    "start": 1790504149290,
+    "stop": 1790504155106,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "50e8c0d2-a785-4972-9d49-90e25abb2009",
+    "historyId": "a967299a16f82619ab90ab88c6045243",
+    "fullName": "ru.edu.qamid.ui.NewsNavigationTest.appSwitchToQuotesFromMainPage",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsNavigationTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "appSwitchToQuotesFromMainPage"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsNavigationTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15477)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

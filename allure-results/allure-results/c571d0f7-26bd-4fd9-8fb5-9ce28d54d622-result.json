@@ -1,0 +1,50 @@
+{
+    "name": "AuthWithEmptyLogin",
+    "start": 1790456401511,
+    "stop": 1790456406136,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "c571d0f7-26bd-4fd9-8fb5-9ce28d54d622",
+    "historyId": "2d4c6bb5d466e3fdffe75290a8233c3f",
+    "fullName": "ru.edu.qamid.ui.NegativeAuthTest.AuthWithEmptyLogin",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "AuthWithEmptyLogin"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NegativeAuthTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14987)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

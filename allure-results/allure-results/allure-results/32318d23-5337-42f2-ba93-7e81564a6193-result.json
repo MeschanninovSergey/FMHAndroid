@@ -1,0 +1,50 @@
+{
+    "name": "shouldCreateNewsAndVerifyItInList",
+    "start": 1790450215470,
+    "stop": 1790450239775,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "32318d23-5337-42f2-ba93-7e81564a6193",
+    "historyId": "63038e00cd83e786080ec4c365bbb4cf",
+    "fullName": "ru.edu.qamid.ui.NewsCreateTest.shouldCreateNewsAndVerifyItInList",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldCreateNewsAndVerifyItInList"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14512)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

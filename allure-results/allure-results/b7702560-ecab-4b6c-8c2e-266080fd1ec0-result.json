@@ -1,0 +1,50 @@
+{
+    "name": "shouldExpandAndCollapseNewsItem",
+    "start": 1790456659491,
+    "stop": 1790456672935,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "b7702560-ecab-4b6c-8c2e-266080fd1ec0",
+    "historyId": "acbe15c7556ea09c21683dbdb4293754",
+    "fullName": "ru.edu.qamid.ui.NewsExpandTest.shouldExpandAndCollapseNewsItem",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsExpandTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldExpandAndCollapseNewsItem"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsExpandTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14987)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

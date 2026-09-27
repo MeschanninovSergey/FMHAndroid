@@ -1,0 +1,50 @@
+{
+    "name": "shouldCreateNewsWithSpecialChars",
+    "start": 1790503937186,
+    "stop": 1790503950556,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "9deab8bc-77b1-4048-955b-0cb088b2ea79",
+    "historyId": "21ea8ef4d9d4d86896c0d68741629d23",
+    "fullName": "ru.edu.qamid.ui.NewsCreateTest.shouldCreateNewsWithSpecialChars",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "shouldCreateNewsWithSpecialChars"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.NewsCreateTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(15477)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

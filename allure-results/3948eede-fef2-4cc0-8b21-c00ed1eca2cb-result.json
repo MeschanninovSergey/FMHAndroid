@@ -1,0 +1,50 @@
+{
+    "name": "appExitTest",
+    "start": 1790456855307,
+    "stop": 1790456860461,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [],
+    "attachments": [],
+    "parameters": [],
+    "uuid": "3948eede-fef2-4cc0-8b21-c00ed1eca2cb",
+    "historyId": "fac88392c67b14c9e65ca0976f0022ce",
+    "fullName": "ru.edu.qamid.ui.PositiveExitApp.appExitTest",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.edu.qamid.ui"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.edu.qamid.ui.PositiveExitApp"
+        },
+        {
+            "name": "testMethod",
+            "value": "appExitTest"
+        },
+        {
+            "name": "suite",
+            "value": "ru.edu.qamid.ui.PositiveExitApp"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: androidx.test.runner.AndroidJUnitRunner(14987)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        }
+    ]
+}

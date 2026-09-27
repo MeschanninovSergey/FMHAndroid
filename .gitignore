@@ -1,0 +1,25 @@
+# IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Mac/Windows
+.DS_Store
+Thumbs.db
+
+# Локальные ключи/секреты
+keystore.properties
+*.keystore
+*.jks
