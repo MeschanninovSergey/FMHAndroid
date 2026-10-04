@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.allOf;
 
 import android.widget.DatePicker;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.actions.DatePickerActions;
 import ru.edu.qamid.ui.utils.EspressoUtils;

@@ -1,43 +1,58 @@
 package ru.edu.qamid.ui;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
+import io.qameta.allure.kotlin.Allure;
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Feature;
+import io.qameta.allure.kotlin.Owner;
+import io.qameta.allure.kotlin.Severity;
+import io.qameta.allure.kotlin.SeverityLevel;
+import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.edu.qamid.ui.base.BaseUiTest;
+import ru.edu.qamid.ui.screens.AuthScreen;
 import ru.edu.qamid.ui.screens.NewsScreen;
+import ru.edu.qamid.ui.utils.AllureStepHelper;
 
 @LargeTest
-@RunWith(AllureAndroidJUnit4.class)
+@Epic("Авторизация")
+@Feature("Позитивный сценарий")
+@Owner("Мещанинов Сергей")
 public class PositiveAuthTest extends BaseUiTest {
 
-   private NewsScreen newsScreen;
+    private AuthScreen authScreen;
+    private NewsScreen newsScreen;
 
-    @After
-    public void tearDown() {
-        try {
-            if (newsScreen != null) {
-                newsScreen.logout();
-            }
-        } catch (Exception ignored) {
+    @Before
+    public void setUp() {
+        if (isOnAuthScreen()) {
+            authScreen = new AuthScreen();
+        } else {
+            // Уже залогинены — выходим, чтобы попасть на экран авторизации
+            new NewsScreen().logout();
+            authScreen = new AuthScreen();
         }
     }
 
     @Test
-    @Description("Успешная авторизация")
+    @DisplayName("Авторизация с валидными данными и переход в главное меню")
+    @Description("Успешная авторизация пользователя с корректными учётными данными, проверка перехода в главное меню приложения")
     @Severity(SeverityLevel.CRITICAL)
     public void AuthOK() {
-        newsScreen = openAuthScreen()
-                .fillLogin("login2")
-                .fillPassword("password2")
-                .clickLoginSuccess();
+        AllureStepHelper.step("Ввод валидных данных и выполнение входа", () -> {
+            newsScreen = authScreen
+                    .fillLogin("login2")
+                    .fillPassword("password2")
+                    .clickLoginSuccess();
+        });
+
+        AllureStepHelper.step("Проверка успешного перехода в главное меню", () -> {
+            newsScreen.assertMainScreenDisplayed();
+        });
     }
 }

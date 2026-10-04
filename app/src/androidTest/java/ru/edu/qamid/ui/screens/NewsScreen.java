@@ -9,7 +9,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.utils.EspressoUtils;
 
@@ -28,7 +28,7 @@ public class NewsScreen extends BaseScreen {
     @Step("Выход из приложения")
     public AuthScreen logout() {
         try {
-            EspressoUtils.waitForView(withId(R.id.authorization_image_button));
+            EspressoUtils.waitForView(withId(R.id.authorization_image_button), 5000);
             onView(allOf(withId(R.id.authorization_image_button), isDisplayed()))
                     .perform(click());
         } catch (Throwable e) {
@@ -36,12 +36,20 @@ public class NewsScreen extends BaseScreen {
         }
 
         try {
-            EspressoUtils.waitForView(allOf(withId(android.R.id.title), withText("Выйти")));
-            onView(allOf(withId(android.R.id.title), withText("Выйти")))
+            EspressoUtils.waitForView(withId(android.R.id.title), 5000);
+            onView(withId(android.R.id.title))
                     .perform(click());
         } catch (Throwable ignored) {
         }
 
         return new AuthScreen();
     }
+
+    @Step("Проверить, что экран главная отображается")
+    public void assertMainScreenDisplayed() {
+        EspressoUtils.waitForView(withId(R.id.trademark_image_view), 5000);
+        onView(withId(R.id.trademark_image_view))
+                .check(matches(isDisplayed()));
+    }
+
 }

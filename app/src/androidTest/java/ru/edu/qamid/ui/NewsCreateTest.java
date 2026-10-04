@@ -7,56 +7,69 @@ import androidx.test.filters.LargeTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Allure;
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Feature;
+import io.qameta.allure.kotlin.Owner;
+import io.qameta.allure.kotlin.Severity;
+import io.qameta.allure.kotlin.SeverityLevel;
+import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.edu.qamid.ui.base.BaseUiTest;
 import ru.edu.qamid.ui.screens.NewsEditScreen;
 import ru.edu.qamid.ui.screens.NewsListScreen;
 import ru.edu.qamid.ui.screens.NewsScreen;
+import ru.edu.qamid.ui.utils.AllureStepHelper;
 import ru.edu.qamid.ui.utils.NewsCategoryRandomizer;
 import ru.edu.qamid.ui.utils.TestDataGenerator;
 
 @LargeTest
-@RunWith(AllureAndroidJUnit4.class)
+@Epic("Управление новостями")
+@Feature("Создание новостей")
+@Owner("Мещанинов Сергей")
 public class NewsCreateTest extends BaseUiTest {
 
     private NewsScreen newsScreen;
+    private final List<String> createdNewsTitles = new ArrayList<>();
 
     @Before
     public void setUp() {
-        newsScreen = loginAsDefaultUser();
+        if (isOnAuthScreen()) {
+            newsScreen = loginDirectly();
+        } else {
+            newsScreen = new NewsScreen();
+        }
     }
 
     @After
     public void tearDown() {
-        try {
-            newsScreen.logout();
-            return;
-        } catch (Exception ignored) {
+        for (String title : createdNewsTitles) {
+            AllureStepHelper.step("Очистка: удаление новости «" + title + "»", () -> {
+                try {
+                    newsScreen.openNewsManagement()
+                            .openEditMode()
+                            .deleteItemByTitle(title)
+                            .confirmDeleteDialog();
+                } catch (Exception e) {
+                    System.out.println("Не удалось удалить новость «" + title + "»: " + e.getMessage());
+                }
+            });
         }
-        for (int i = 0; i < 5; i++) {
-            try {
-                pressBack();
-            } catch (Exception ignored) {
-                break;
-            }
-        }
-        try {
-            newsScreen.logout();
-        } catch (Exception ignored) {
-        }
+        createdNewsTitles.clear();
     }
 
     @Test
+    @DisplayName("Создание новости и проверка в списке")
     @Description("Успешное создание новости")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Позитивные сценарии")
     public void shouldCreateNewsAndVerifyItInList() {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
 
@@ -64,30 +77,37 @@ public class NewsCreateTest extends BaseUiTest {
         String description = "Test_" + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        createdNewsTitles.add(title1);
 
-        NewsListScreen newsList = editScreen
-                .selectCategory(randomCategory)
-                .enterTitle(title1)
-                .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
-                .confirmTime()
-                .enterDescription(description)
-                .saveNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        newsList.pullToRefresh();
-        newsList.scrollUntilNewsItemFound(title1);
-        newsList.assertNewsItemVisible(title1);
+            AllureStepHelper.step("Заполнение и сохранение новости", () -> {
+                NewsListScreen newsList = editScreen
+                        .selectCategory(randomCategory)
+                        .enterTitle(title1)
+                        .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
+                        .confirmTime()
+                        .enterDescription(description)
+                        .saveNews();
 
-        newsList.deleteItemByTitle(title1)
-                .confirmDeleteDialog();
+                AllureStepHelper.step("Проверка новости в списке", () -> {
+                    newsList.pullToRefresh();
+                    newsList.scrollUntilNewsItemFound(title1);
+                    newsList.assertNewsItemVisible(title1);
+                });
+            });
+        });
     }
 
     @Test
+    @DisplayName("Создание новости, проверяем что после операции выход/вход новость отображается")
     @Description("Проверка созданной новости после выхода из приложения и новой авторизации")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Позитивные сценарии")
     public void shouldNewsPersistAfterRelogin() {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
 
@@ -95,35 +115,46 @@ public class NewsCreateTest extends BaseUiTest {
         String description = "Test_" + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsListScreen newsList = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews()
-                .selectCategory(randomCategory)
-                .enterTitle(title1)
-                .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
-                .confirmTime()
-                .enterDescription(description)
-                .saveNews();
+        createdNewsTitles.add(title1);
 
-        newsList.pullToRefresh();
-        newsList.scrollToNewsItem(title1);
-        newsList.assertNewsItemVisible(title1);
+        AllureStepHelper.step("Создание новости", () -> {
+            NewsListScreen newsList = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews()
+                    .selectCategory(randomCategory)
+                    .enterTitle(title1)
+                    .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
+                    .confirmTime()
+                    .enterDescription(description)
+                    .saveNews();
 
-        pressBack();
+            AllureStepHelper.step("Проверка новости в списке до релогина", () -> {
+                newsList.pullToRefresh()
+                        .scrollToNewsItem(title1)
+                        .assertNewsItemVisible(title1);
+            });
+        });
 
-        newsScreen.logout();
-        newsScreen = loginAsDefaultUser();
-        newsScreen.openNewsManagement()
-                .openEditMode()
-                .scrollToNewsItem(title1)
-                .assertNewsItemVisible(title1);
-        pressBack();
+        AllureStepHelper.step("Выход и повторная авторизация", () -> {
+            pressBack();
+            newsScreen.logout();                 // <-- просто вызываем, без присваивания
+            newsScreen = loginDirectly();        // <-- после выхода логинимся заново
+        });
+
+        AllureStepHelper.step("Проверка новости после релогина", () -> {
+            newsScreen.openNewsManagement()
+                    .openEditMode()
+                    .scrollUntilNewsItemFound(title1)
+                    .assertNewsItemVisible(title1);
+        });
     }
 
     @Test
+    @DisplayName("Создание новости, проверяем новость со специальными символами отображается")
     @Description("Создание новости со специальными символами")
     @Severity(SeverityLevel.MINOR)
+    @Story("Позитивные сценарии")
     public void shouldCreateNewsWithSpecialChars() {
         LocalDate tomorrow = LocalDate.now().plusDays(2);
 
@@ -131,22 +162,25 @@ public class NewsCreateTest extends BaseUiTest {
         String description = "Test_{}[]@#$%^&* " + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsListScreen newsList = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews()
-                .selectCategory(randomCategory)
-                .enterTitle(title)
-                .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
-                .confirmTime()
-                .enterDescription(description)
-                .saveNews();
+        createdNewsTitles.add(title);
 
-        newsList.pullToRefresh();
-        newsList.scrollUntilNewsItemFound(title);
-        newsList.assertNewsItemVisible(title);
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsListScreen newsList = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews()
+                    .selectCategory(randomCategory)
+                    .enterTitle(title)
+                    .setAndConfirmDate(tomorrow.getYear(), tomorrow.getMonthValue(), tomorrow.getDayOfMonth())
+                    .confirmTime()
+                    .enterDescription(description)
+                    .saveNews();
 
-        newsList.deleteItemByTitle(title)
-                .confirmDeleteDialog();
+            AllureStepHelper.step("Проверка новости со спецсимволами в списке", () -> {
+                newsList.pullToRefresh();
+                newsList.scrollUntilNewsItemFound(title);
+                newsList.assertNewsItemVisible(title);
+            });
+        });
     }
 }

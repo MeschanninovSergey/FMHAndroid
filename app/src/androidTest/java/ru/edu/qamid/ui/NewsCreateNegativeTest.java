@@ -1,179 +1,223 @@
 package ru.edu.qamid.ui;
 
-import static androidx.test.espresso.Espresso.pressBack;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import io.qameta.allure.kotlin.Allure;
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Feature;
+import io.qameta.allure.kotlin.Owner;
+import io.qameta.allure.kotlin.Severity;
+import io.qameta.allure.kotlin.SeverityLevel;
+import io.qameta.allure.kotlin.Step;
+import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.edu.qamid.ui.base.BaseUiTest;
 import ru.edu.qamid.ui.screens.NewsEditScreen;
 import ru.edu.qamid.ui.screens.NewsScreen;
+import ru.edu.qamid.ui.utils.AllureStepHelper;
 import ru.edu.qamid.ui.utils.NewsCategoryRandomizer;
 import ru.edu.qamid.ui.utils.TestDataGenerator;
 
 @LargeTest
-@RunWith(AllureAndroidJUnit4.class)
+@Epic("Управление новостями")
+@Feature("Создание новостей")
+@Owner("Мещанинов Сергей")
 public class NewsCreateNegativeTest extends BaseUiTest {
 
     private NewsScreen newsScreen;
+    private final List<String> createdNewsTitles = new ArrayList<>();
 
     @Before
     public void setUp() {
-        newsScreen = loginAsDefaultUser();
-    }
-
-    @After
-    public void tearDown() {
-        try {
-            pressBack();
-            pressBack();
-            pressBack();
-            newsScreen.logout();
-        } catch (Exception e) {
-            try {
-                pressBack();
-                pressBack();
-                newsScreen.logout();
-            } catch (Exception ignored) {
-            }
+        if (isOnAuthScreen()) {
+            // Мы на экране авторизации: логинимся напрямую
+            newsScreen = loginDirectly();
+        } else {
+            // Мы уже в приложении (на главном/другом экране): не логинимся, просто оборачиваем экран
+            newsScreen = new NewsScreen();
         }
     }
 
     @Test
-    @Description("Создание новости с некорректной категорией")
+    @Step
+    @DisplayName("Создание новости с некорректной категорией")
+    @Description("Создание новости, проверяем невозможность указания некорректной категории")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithInvalidCategory() {
-
         String title1 = TestDataGenerator.generateNewsTitle();
         String description = "Test_" + UUID.randomUUID().toString();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.enterCategoryText("ошибка")
-                .enterTitle(title1)
-                .confirmDateAndTime()
-                .enterDescription(description)
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных с некорректной категорией", () -> {
+                editScreen.enterCategoryText("ошибка")
+                        .enterTitle(title1)
+                        .confirmDateAndTime()
+                        .enterDescription(description);
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 
     @Test
-    @Description("Создание новости с пустым полем Категория")
+    @DisplayName("Создание новости с пустым полем Категория")
+    @Description("Создание новости, проверяем невозможность сохранения новости с пустым полем категория")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithEmptyCategory() {
-
         String title1 = TestDataGenerator.generateNewsTitle();
         String description = "Test_" + UUID.randomUUID().toString();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.enterTitle(title1)
-                .confirmDateAndTime()
-                .enterDescription(description)
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных без указания категории", () -> {
+                editScreen.enterTitle(title1)
+                        .confirmDateAndTime()
+                        .enterDescription(description);
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 
     @Test
-    @Description("Создание новости с пустым полем Заголовок")
+    @DisplayName("Создание новости с пустым полем Заголовок")
+    @Description("Создание новости, проверяем невозможность сохранения новости с пустым полем Заголовок")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithEmptyTitle() {
-
         String description = "Test_" + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.selectCategory(randomCategory)
-                .enterTitle("")
-                .confirmDateAndTime()
-                .enterDescription(description)
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных с пустым заголовком", () -> {
+                editScreen.selectCategory(randomCategory)
+                        .enterTitle("")
+                        .confirmDateAndTime()
+                        .enterDescription(description);
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 
     @Test
-
-    @Description("Создание новости с пустым полем Дата публикации")
+    @DisplayName("Создание новости с пустым полем Дата публикации")
+    @Description("Создание новости, проверяем невозможность сохранения новости с пустым полем Дата публикации")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithEmptyDate() {
-
         String title1 = TestDataGenerator.generateNewsTitle();
         String description = "Test_" + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.enterCategoryText(randomCategory)
-                .enterTitle(title1)
-                .confirmTime()
-                .enterDescription(description)
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных без даты публикации", () -> {
+                editScreen.enterCategoryText(randomCategory)
+                        .enterTitle(title1)
+                        .confirmTime()
+                        .enterDescription(description);
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 
     @Test
-    @Description("Создание новости с пустым полем Время публикации")
+    @DisplayName("Создание новости с пустым полем Время публикации")
+    @Description("Создание новости, проверяем невозможность сохранения новости с пустым полем Время публикации")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithEmptyTime() {
-
         String title1 = TestDataGenerator.generateNewsTitle();
         String description = "Test_" + UUID.randomUUID().toString();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.enterCategoryText(randomCategory)
-                .enterTitle(title1)
-                .confirmDate()
-                .enterDescription(description)
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных без времени публикации", () -> {
+                editScreen.enterCategoryText(randomCategory)
+                        .enterTitle(title1)
+                        .confirmDate()
+                        .enterDescription(description);
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 
     @Test
-    @Description("Создание новости с пустым полем Описание")
+    @DisplayName("Создание новости с пустым полем Описание")
+    @Description("Создание новости, проверяем невозможность сохранения новости с пустым полем Описание")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Негативные сценарии")
     public void shouldStayOnCreateScreenWithEmptyDescription() {
-
         String title1 = TestDataGenerator.generateNewsTitle();
         String randomCategory = NewsCategoryRandomizer.getRandomCategory();
 
-        NewsEditScreen editScreen = newsScreen
-                .openNewsManagement()
-                .openEditMode()
-                .clickAddNews();
+        AllureStepHelper.step("Открытие формы создания новости", () -> {
+            NewsEditScreen editScreen = newsScreen
+                    .openNewsManagement()
+                    .openEditMode()
+                    .clickAddNews();
 
-        editScreen.enterCategoryText(randomCategory)
-                .enterTitle(title1)
-                .confirmDateAndTime()
-                .saveNewsExpectingFailure()
-                .assertStillOnCreateScreen();
+            AllureStepHelper.step("Заполнение данных без описания", () -> {
+                editScreen.enterCategoryText(randomCategory)
+                        .enterTitle(title1)
+                        .confirmDateAndTime();
+            });
+
+            AllureStepHelper.step("Попытка сохранения и проверка, что экран не закрылся", () -> {
+                editScreen.saveNewsExpectingFailure()
+                        .assertStillOnCreateScreen();
+            });
+        });
     }
 }

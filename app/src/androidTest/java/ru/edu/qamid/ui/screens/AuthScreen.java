@@ -10,13 +10,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
 
-import android.view.View;
-
-import org.hamcrest.Matcher;
-
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.utils.EspressoUtils;
 
@@ -29,7 +24,6 @@ public class AuthScreen {
                 .perform(replaceText(login), closeSoftKeyboard());
         return this;
     }
-
 
     @Step("Ввести пароль: {password}")
     public AuthScreen fillPassword(String password) {
@@ -48,7 +42,8 @@ public class AuthScreen {
 
     @Step("Нажать кнопку «Войти» (ожидаем ошибку)")
     public AuthScreen clickLoginExpectingError() {
-        onView(allOf(withId(R.id.enter_button), withText("Войти"), isDisplayed()))
+        EspressoUtils.waitForView(allOf(withId(R.id.enter_button), isDisplayed()));
+        onView(allOf(withId(R.id.enter_button), isDisplayed()))
                 .perform(click());
         return this;
     }

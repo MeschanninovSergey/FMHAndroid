@@ -7,7 +7,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.utils.EspressoUtils;
 

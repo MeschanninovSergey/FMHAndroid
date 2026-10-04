@@ -13,18 +13,15 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId "ru.edu.qamid"
-        minSdk 23
+        applicationId = "ru.edu.qamid"
+        minSdk = 26
         targetSdk = 36
-        versionCode 14
-        versionName "1.0.0"
+        versionCode = 14
+        versionName = "1.0.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "io.qameta.allure.android.runners.AllureAndroidJUnitRunner"
     }
 
-    allure {
-        version = "2.27.0"
-    }
 
     compileOptions {
         coreLibraryDesugaringEnabled true
@@ -37,8 +34,8 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
-        buildConfig true
+        viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -49,6 +46,43 @@ android {
         }
         debug {
             buildConfigField "String", "BASE_URL", '"https://students.netoservices.ru/qamid-diplom-backend/"'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def variantName = variant.name
+        def pullTask = tasks.register("pullAllureResults${variantName.capitalize()}") {
+            group = 'verification'
+            doLast {
+                def pkg = "ru.edu.qamid"
+                def resultsDir = file("${buildDir}/allure-results")
+                resultsDir.mkdirs()
+
+                // 1. Копируем результаты из app storage в /sdcard
+                exec {
+                    executable 'adb'
+                    args 'shell', 'run-as', pkg, 'cp', '-r', "/data/data/${pkg}/files/allure-results", "/sdcard/allure-results-${variantName}"
+                    ignoreExitValue = true
+                }
+
+                // 2. Pull с sdcard на хост
+                exec {
+                    executable 'adb'
+                    args 'pull', "/sdcard/allure-results-${variantName}/.", resultsDir.absolutePath
+                    ignoreExitValue = true
+                }
+
+                // 3. Чистим на устройстве
+                exec {
+                    executable 'adb'
+                    args 'shell', 'rm', '-rf', "/sdcard/allure-results-${variantName}"
+                    ignoreExitValue = true
+                }
+            }
+        }
+
+        tasks.matching { it.name == 'allureReport' }.configureEach {
+            dependsOn pullTask
         }
     }
 }

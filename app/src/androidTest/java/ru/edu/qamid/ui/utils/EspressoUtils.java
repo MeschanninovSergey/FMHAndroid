@@ -1,9 +1,10 @@
 package ru.edu.qamid.ui.utils;
 
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.hamcrest.Matcher;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.NoMatchingViewException;
@@ -12,11 +13,12 @@ import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import org.hamcrest.Matcher;
 
 public final class EspressoUtils {
     private EspressoUtils() {}
 
+    // Основной метод: ждёт появления View по Matcher'у
     public static void waitForView(Matcher<View> matcher, long timeoutMillis) {
         long endTime = System.currentTimeMillis() + timeoutMillis;
         Throwable lastError = null;
@@ -35,6 +37,15 @@ public final class EspressoUtils {
 
     public static void waitForView(Matcher<View> matcher) {
         waitForView(matcher, 10000);
+    }
+
+    // НОВАЯ ПЕРЕГРУЗКА: принимает R.id и делает withId внутри
+    public static void waitForView(int resId, long timeoutMs) {
+        waitForView(withId(resId), timeoutMs);
+    }
+
+    public static void waitForView(int resId) {
+        waitForView(resId, 10000);
     }
 
     public static ViewAction clickOnChildViewWithId(final int id) {
@@ -59,5 +70,16 @@ public final class EspressoUtils {
                 }
             }
         };
+    }
+
+    // Теперь этот метод работает: он вызывает новую перегрузку waitForView(int, long)
+    public static boolean softWaitForView(int resId, long timeoutMs) {
+        try {
+            waitForView(resId, timeoutMs);
+            return true;
+        } catch (Exception e) {
+            // Тихо игнорируем — это и есть «мягкий» вариант
+            return false;
+        }
     }
 }

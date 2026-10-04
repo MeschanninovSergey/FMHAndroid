@@ -16,13 +16,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 
-import static ru.edu.qamid.ui.actions.TimePickerActions.setTime;
-import static ru.edu.qamid.ui.utils.EspressoUtils.clickOnChildViewWithId;
-
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.actions.DatePickerActions;
 import ru.edu.qamid.ui.actions.TimePickerActions;
@@ -184,6 +181,30 @@ public class NewsEditScreen extends NewsListScreen {
                 withText(expected)));
         onView(allOf(withId(R.id.news_category_auto_complete), withText(expected)))
                 .check(matches(isDisplayed()));
+        return this;
+    }
+
+    @Step("Проверить, что в поле даты публикации установлено «{expectedDateString}»")
+    public NewsEditScreen assertPublishDate(String expectedDateString) {
+        // Ждём появления поля
+        EspressoUtils.waitForView(withId(R.id.news_publish_date_edit_text));
+
+        // Проверяем точное совпадение текста
+        onView(withId(R.id.news_publish_date_edit_text))
+                .check(matches(withText(expectedDateString)));
+
+        return this;
+    }
+
+    @Step("Проверить, что в поле времени публикации установлено «{expectedTime}»")
+    public NewsEditScreen assertPublishTime(String expectedTime) {
+        // 1. Ждём появления поля (на случай асинхронной загрузки экрана)
+        EspressoUtils.waitForView(withId(R.id.news_publish_time_edit_text));
+
+        // 2. Проверяем текст внутри EditText
+        onView(withId(R.id.news_publish_time_edit_text))
+                .check(matches(withText(expectedTime)));
+
         return this;
     }
 

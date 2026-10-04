@@ -4,28 +4,23 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.swipeDown;
-import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
-
 import static ru.edu.qamid.ui.utils.EspressoUtils.clickOnChildViewWithId;
 
 import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.kotlin.Step;
 import ru.edu.qamid.R;
 import ru.edu.qamid.ui.utils.EspressoUtils;
 
@@ -176,6 +171,22 @@ public class NewsListScreen extends BaseScreen {
         return this;
     }
 
+//    @Step("Проверить статус новости с нужным заголовком")
+//    public NewsListScreen assertNewsItemStatus(String titleText, String status) {
+//        EspressoUtils.waitForView(withId(R.id.news_list_recycler_view));
+//        onView(withId(R.id.news_list_recycler_view))
+//                .perform(RecyclerViewActions.actionOnItem(
+//                        hasDescendant(withText(titleText)), scrollTo()));
+//        onView(allOf(
+//                isDescendantOfA(allOf(
+//                        withId(R.id.news_item_material_card_view),
+//                        hasDescendant(withText(titleText)))),
+//                withId(R.id.news_item_published_text_view),
+//                withText(status)))
+//                .check(matches(isDisplayed()));
+//        return this;
+//    }
+
     @Step("Проверить статус новости с нужным заголовком")
     public NewsListScreen assertNewsItemStatus(String titleText, String status) {
         EspressoUtils.waitForView(withId(R.id.news_list_recycler_view));
@@ -211,7 +222,9 @@ public class NewsListScreen extends BaseScreen {
 
     @Step("Удалить новость с нужным заголовком")
     public NewsListScreen deleteItemByTitle(String title) {
-        EspressoUtils.waitForView(withId(R.id.news_list_recycler_view));
+        if (!EspressoUtils.softWaitForView(R.id.news_list_recycler_view, 5000)) {
+            return this;
+        }
         onView(withId(R.id.news_list_recycler_view))
                 .perform(RecyclerViewActions.actionOnItem(
                         hasDescendant(withText(title)), scrollTo()));

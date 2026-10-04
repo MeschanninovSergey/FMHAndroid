@@ -4,34 +4,49 @@ import androidx.test.filters.LargeTest;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.Allure;
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Epic;
+import io.qameta.allure.kotlin.Feature;
+import io.qameta.allure.kotlin.Owner;
+import io.qameta.allure.kotlin.Severity;
+import io.qameta.allure.kotlin.SeverityLevel;
+import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.edu.qamid.ui.base.BaseUiTest;
 import ru.edu.qamid.ui.screens.NewsScreen;
+import ru.edu.qamid.ui.utils.AllureStepHelper;
 
 @LargeTest
-@RunWith(AllureAndroidJUnit4.class)
+@Epic("Выход из аккаунта")
+@Feature("Выход из приложения")
+@Owner("Мещанинов Сергей")
 public class PositiveExitApp extends BaseUiTest {
 
     private NewsScreen newsScreen;
 
     @Before
     public void setUp() {
-        newsScreen = openAuthScreen()
-                .fillLogin("login2")
-                .fillPassword("password2")
-                .clickLoginSuccess();
+        if (isOnAuthScreen()) {
+            newsScreen = loginAsDefaultUser();
+        } else {
+            newsScreen = new NewsScreen();
+        }
     }
 
     @Test
-    @Description("Успешный выход из приложения")
+    @DisplayName("Успешный выход из приложения")
+    @Description("Проверка успешного выхода из аккаунта: выполняется logout, ожидается возврат на экран авторизации")
     @Severity(SeverityLevel.CRITICAL)
+    @Story("Успешный выход")
     public void appExitTest() {
+        AllureStepHelper.step("Выполнение выхода из аккаунта", () -> {
+            newsScreen.logout();
+        });
 
-        newsScreen.logout();
+        AllureStepHelper.step("Проверка перехода на экран авторизации", () -> {
+            openAuthScreen().assertAuthScreenDisplayed();
+        });
     }
 }
